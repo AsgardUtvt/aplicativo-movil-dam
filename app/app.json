@@ -1,0 +1,40 @@
+{
+  "expo": {
+    "name": "new_app",
+    "slug": "new_app",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#E6F4FE",
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundImage": "./assets/adaptive-icon.png",
+        "monochromeImage": "./assets/adaptive-icon.png"
+      },
+      "predictiveBackGestureEnabled": false
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      "expo-status-bar",
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "La aplicación necesita acceso a tus fotos para poder seleccionarlas."
+        }
+      ],
+      [
+        "expo-location",
+        {
+          "locationAlwaysAndWhenInUsePermission": "La aplicación utiliza tu ubicación para mostrarte información en tiempo real."
+        }
+      ]
+    ]
+  }
+}

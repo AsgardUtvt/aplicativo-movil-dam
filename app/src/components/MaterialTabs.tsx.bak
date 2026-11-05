@@ -1,0 +1,65 @@
+import { createMaterialTopTabNavigator, createMaterialTopTabScreen } from '@react-navigation/material-top-tabs'
+import { BtnTouch } from '../components/BtnTouch'
+import { PokemonFull } from './PokemonFull'
+import {PokemonDetailResponse} from '../interfaces/pokemonResponse';
+import { useDetailPokemon } from '../hooks/useDetailPokemon';
+import { useTypeColorPokemon } from '../hooks/useTypeColorPokemon';
+import { ActivityIndicator } from 'react-native';
+import { PokemonCombate } from './PokemonCombate';
+import {PokemonEspecie} from './PokemonEspecie';
+import {PokemonFisico} from './PokemonFisico';
+
+const Tab = createMaterialTopTabNavigator();
+interface Props {
+    id: string | number;
+}
+
+
+
+export const MyTabsPokemonDetail = ({ id }: Props) => {
+const { isLoading, color } = useTypeColorPokemon(id);
+const { detailPokemon} = useDetailPokemon(id);
+    return (
+        <Tab.Navigator>
+            <Tab.Screen 
+                name="Fisicos" 
+                component={() => (!detailPokemon) ? (
+                    <ActivityIndicator 
+                        size={100}
+                        color={color[0]}/>
+                    ) : 
+                    (
+                    <PokemonFisico 
+                        pokemon={ detailPokemon }
+                        types={ color }/>
+                    ) } 
+            />
+            <Tab.Screen 
+                name="Combate" 
+                component={() => (!detailPokemon) ? (
+                    <ActivityIndicator 
+                        size={100}
+                        color={color[0]}/>
+                    ) : 
+                    (
+                    <PokemonCombate
+                        pokemon={ detailPokemon }
+                        types={ color }/>
+                    ) } 
+            />
+            <Tab.Screen 
+                name="Especie" 
+                component={() => (!detailPokemon) ? (
+                    <ActivityIndicator 
+                        size={100}
+                        color={color[0]}/>
+                    ) : 
+                    (
+                    <PokemonEspecie 
+                        pokemon={ detailPokemon }
+                        types={ color }/>
+                    ) } 
+            />
+        </Tab.Navigator>
+    )
+}

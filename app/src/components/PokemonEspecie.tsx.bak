@@ -1,0 +1,112 @@
+import { View, Text, StyleSheet, ScrollView, Image } from 'react-native';
+import { PokemonDetailResponse } from '../interfaces/pokemonResponse';
+import { useEffect, useState } from 'react';
+interface Props {
+  pokemon: PokemonDetailResponse;
+  types: string[];
+}
+
+interface PokemonSpeciesResponse {
+    color: { name: string };
+    habitat: { name: string } | null;
+    gender_rate: number;
+    flavor_text_entries: { flavor_text: string; lenguage: { name: string } }[];
+}
+
+
+
+
+
+export const PokemonEspecie = ( { pokemon, types }:Props ) => {
+    const [detalleEspecie, setDetalleEspecie] = useState<any>(null);
+
+    const tipos = pokemon.types.map(t => t.type.name);
+    const especieBase = pokemon.species.name;
+    const urlEspecie = pokemon.species.url;
+
+  useEffect(() => {
+    const obtenerEspecie = async () => {
+      const urlEspecie = pokemon.species.url;
+      const detalles = await getSpeciesDetails(urlEspecie);
+      setDetalleEspecie(detalles); // Corregido el nombre
+    };
+    
+    obtenerEspecie();
+  }, [urlEspecie]);
+
+  const getSpeciesDetails = async (url: string) => {
+    const res = await fetch(url);
+    const data: PokemonSpeciesResponse = await res.json();
+    return {
+      color: data.color.name,
+      habitat: data.habitat?.name || 'Desconocido',
+      genero: data.gender_rate === -1 ? 'Sin género' : 'Con género'
+    };
+  };
+
+  return(
+    <View
+      style={ style.containerDetail }
+    >
+      <ScrollView>
+          <Text
+              style={{ ...style.text}}
+          >
+              Especie base
+          </Text>
+          <Text
+              style={{
+                  ...style.text,
+                  textAlign: 'justify',
+                  fontSize: 20
+              }}
+          >
+              { tipos }
+          </Text>
+          <Text
+              style={style.text}
+          >
+              Tipos
+          </Text>
+        <View style={{ flexDirection: 'column' }}>
+              {tipos.map((tipo, i) => (
+                <View key={i} >
+                    <Text style={{ ...style.text, fontSize: 20, textAlign: 'justify' }}>{tipo}</Text>
+        </View>
+      ))}
+    </View>
+        <Text
+            style={ style.text }
+        >
+            Detalles de especie
+        </Text>
+        { detalleEspecie ? (
+        <View>
+            <Text style={{ ...style.text, fontSize: 20, textAlign: 'justify' }}>Color: {detalleEspecie.color}</Text>
+            <Text style={{ ...style.text, fontSize: 20, textAlign: 'justify' }}>Hábitat: {detalleEspecie.habitat}</Text>
+            <Text style={{ ...style.text, fontSize: 20, textAlign: 'justify' }}>Género: {detalleEspecie.genero}</Text>
+        </View>
+        ) : (
+        <Text style={style.text}>Cargando detalles...</Text>
+        )}
+      </ScrollView>
+    </View>
+  );
+};
+
+
+const style = StyleSheet.create({
+  containerDetail: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  text: {
+    fontSize: 40,
+    textAlign: 'center'
+  },
+  picture: {
+    width: 150,
+    height: 150
+  }
+});

@@ -1,0 +1,41 @@
+services:
+  db_maria:
+    image: mariadb:10:11
+    container_name: am_maria_db
+    restart: always
+    environment:
+      MARIADB_ROOT_PASSWORD: "root"
+      MARIADB_USER: "asgard"
+      MARIADB_PASSWORD: "admin"
+    ports:
+      - "3038:3306"
+    volumes:
+      - db_data_maria:/var/lib/mysql
+  db_postgresql:
+    image: postgres:latest
+    container_name: mi_postgres_db
+    restart: always
+    environment:
+      POSTGRES_USER: 'asgard'
+      POSTGRES_PASSWORD: 'admin'
+    ports:
+      - "8081:5432"
+    volumes:
+      - db_data_pg:/var/lib/postgresql/data
+  db_sql_server:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: my_sql_server
+    restart: always
+    environment: 
+      ACCEPT_EULA: "Y"
+      MSSQL_SA_PASSWORD: "AsgardYago1@"
+    ports:
+      - "1433:1433"
+    volumes:
+      - db_data_myssql:/var/opt/mssql
+    
+
+volumes:
+  db_data_maria:
+  db_data_pg:
+  db_data_myssql:

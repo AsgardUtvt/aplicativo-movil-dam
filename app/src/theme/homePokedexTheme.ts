@@ -1,0 +1,65 @@
+import { StyleSheet } from "react-native";
+
+export const homePokedexTheme = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#000000', 
+  },
+  backgroundPattern: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: '100%',
+    opacity: 0.05,
+    backgroundColor: 'rgba(250, 244, 211, 0.1)', 
+    zIndex: 0,
+  },
+  headerContainer: {
+    paddingHorizontal: 20,
+    paddingTop: 40,
+    paddingBottom: 20,
+    borderBottomWidth: 1,
+    borderBottomColor: 'rgba(250, 244, 211, 0.1)',
+    marginBottom: 10,
+    zIndex: 1,
+  },
+  title: {
+    fontSize: 26,
+    fontWeight: '900',
+    color: '#ffffff', 
+    textTransform: 'uppercase',
+    letterSpacing: 2,
+    textShadowColor: undefined,
+    textShadowOffset: { width: 0, height: 0 },
+    textShadowRadius: 10,
+    marginBottom: 15,
+    textAlign: 'center',
+  },
+  filtersRow: {
+    flexDirection: 'row',
+    gap: 10,
+  },
+  filterChip: {
+    color: '#fff',
+    backgroundColor: 'rgba(0, 70, 67, 0.1)',
+    borderWidth: 1,
+    borderColor: '#faf4d3',
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+    borderRadius: 4,
+    fontSize: 12,
+    fontWeight: '600',
+    textTransform: 'uppercase',
+  },
+  listContent: {
+    paddingBottom: 40,
+  },
+  cardContainer: {
+    flex: 1,
+    margin: 8,
+    aspectRatio: 1, 
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+});

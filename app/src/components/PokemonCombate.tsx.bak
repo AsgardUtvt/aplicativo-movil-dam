@@ -1,0 +1,171 @@
+import { View, Text, StyleSheet, ScrollView, Image } from 'react-native';
+import { PokemonDetailResponse } from '../interfaces/pokemonResponse';
+
+interface Props {
+  pokemon: PokemonDetailResponse;
+  types: string[];
+}
+
+const DATA = [
+    { id: '1', title: '', }
+];
+
+export const PokemonCombate = ( { pokemon, types }:Props ) => {
+    
+const { stats } = pokemon;
+
+const getStat = ( name: string ) => stats.find( s => s.stat.name === name ) ?.base_stat || 0;
+
+const combate = {
+    hp: getStat('hp'),
+    attack: getStat('attack'),
+    defense: getStat('defense'),
+    spAtack: getStat('espeial-attack'),
+    spDef: getStat('especial-defense'),
+    speed: getStat('speed')
+};
+
+const habilidades = pokemon.abilities.map( a => ({
+    nombre: a.ability?.name,
+    esOculta: a.is_hidden
+}));
+
+interface HeldItem {
+    item: { name: string; url: string};
+    version_detail: { rarity: number; version: { name: string } }[];
+}
+
+const equipameinto = (pokemon.held_items as HeldItem[]).map(h => ({
+    item: h.item.name,
+    rareza: (h.version_detail && h.version_detail.length > 0) ? h.version_detail[0].rarity : 0
+}));
+
+const movimientos = pokemon.moves.map(m => ({
+    nombre: m.move.name,
+    metodo: m.version_group_details[0]?.move_learn_method.name
+}));
+
+  return(
+    <View
+      style={ style.containerDetail }
+    >
+      <ScrollView>
+        <Text
+            style={ style.text }
+        >
+            Estadisiticas
+        </Text>
+        <Text
+          style={{ 
+              ...style.text,
+              textAlign:'justify',
+              fontSize:20
+            }}
+        >
+          HP: { combate.hp }
+        </Text>
+        <Text
+          style={{ 
+              ...style.text,
+              textAlign:'justify',
+              fontSize:20
+            }}
+        >
+          Attack: { combate.attack }
+        </Text>
+        <Text
+          style={{ 
+              ...style.text,
+              textAlign:'justify',
+              fontSize:20
+            }}
+        >
+            Especial attack: { combate.spAtack }  
+        </Text>
+        <Text
+          style={{ 
+              ...style.text,
+              textAlign:'justify',
+              fontSize:20
+            }}
+        >
+            Especial denfense: { combate.spDef }  
+        </Text>
+        <Text
+          style={{ 
+              ...style.text,
+              textAlign:'justify',
+              fontSize:20
+            }}
+        >
+            Especial denfense: { combate.speed}  
+        </Text>
+        <Text
+            style={ style.text }
+        >
+            Habilidades especiales
+        </Text>
+        <View style={{ flexDirection: 'column' }}>
+            {habilidades.map((h, i) => (
+                <View key={i} style={{ backgroundColor: '#f0f0f0' }}>
+                    <Text style={{ ...style.text, fontSize: 20, textAlign: 'justify' }}>
+                        {h.nombre} {h.esOculta ? '(Oculta)' : ''}
+                    </Text>
+                 </View>
+            ))}
+        </View>
+        <Text
+            style={ style.text }
+        >
+            Equipamiento
+        </Text>
+        <View style={{ flexDirection: 'column' }}>
+            {(equipameinto.length > 0)? ( equipameinto.map((e, i) => (
+                <View key={i} style={{ backgroundColor: '#f0f0f0' }}>
+                    <Text style={{ ...style.text, fontSize: 20, textAlign: 'justify' }}>
+                        {e.item} - Rareza: { e.rareza }
+                    </Text>
+                 </View>
+            ))):
+            (
+                <Text
+                    style={{ ...style.text, fontSize: 20, textAlign: 'justify' }}
+                >
+                    No hay equipameinto
+                </Text>
+            )}
+        </View>
+        <Text
+            style={ style.text }
+        >
+            Ataques / Movimientos
+        </Text>
+        <View style={{ flexDirection: 'column' }}>
+            {movimientos.map((m, i) => (
+                <View key={i} style={{ backgroundColor: '#f0f0f0' }}>
+                    <Text style={{ ...style.text, fontSize: 20, textAlign: 'justify' }}>
+                        {m.nombre} ({m.metodo})
+                    </Text>
+                 </View>
+            ))}
+        </View>
+      </ScrollView>
+    </View>
+  );
+}
+
+const style = StyleSheet.create({
+  containerDetail: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  text: {
+    fontSize: 40,
+    textAlign: 'center'
+  },
+  picture: {
+    width: 150,
+    height: 150
+  }
+});
