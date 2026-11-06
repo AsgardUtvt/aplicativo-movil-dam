@@ -16,7 +16,7 @@ interface UseUserApi {
 export const useUserApi = (): UseUserApi => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [listUser, setListUser] = useState<UserRespose[]>([]);
-  const urlApi = "http://192.168.137.42:3000/users";
+  const urlApi = "http://192.168.232.42:3000/users";
 
   const loadUsers = async () => {
     setIsLoading(true);

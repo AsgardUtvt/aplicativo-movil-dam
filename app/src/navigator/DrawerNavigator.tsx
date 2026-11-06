@@ -12,6 +12,7 @@ import {ImagePickerScreen} from "../screens/ImagePickerScreen";
 import { LocationScreen } from "../screens/LocationScreen";
 import {useContext} from "react";
 import {AuthContext} from "../context/AuthContext";
+import { DataResponseScreen } from "../screens/DataResponseScreen";
 
 export type RootDrawerParams = {
     StackNavigator: undefined;
@@ -21,9 +22,7 @@ export type RootDrawerParams = {
     LoginScreen: undefined;
     ImagePickerScreen: undefined;
     LocationScreen: undefined;
-    
-
-
+    DataResponseScreen: undefined;
 }
 
 const Drawer = createDrawerNavigator<RootDrawerParams>();
@@ -81,6 +80,11 @@ export const DrawerNavigator = () => {
             <Drawer.Screen
                 name="LocationScreen"
                 component={LocationScreen}
+            />
+            <Drawer.Screen
+                name="DataResponseScreen"
+                options={{ title: "Estadisticas"}}
+                component={DataResponseScreen}
             />
         </Drawer.Navigator>
     );

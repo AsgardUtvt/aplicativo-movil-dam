@@ -6,7 +6,7 @@ import { tareaApi } from '../api/tareasApi';
 export const useTareaApi = () => {
     const [isLoading, setLoading] = useState(false);
     const [listTareas, setListTareas] = useState<Tarea[]>([]);
-    const url = "http://192.168.137.42:3000/tareas";
+    const url = "http://192.168.232.42:3000/tareas";
 
     const loadTarea = async () => {
         setLoading(true);

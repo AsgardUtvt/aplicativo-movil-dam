@@ -29,7 +29,7 @@ interface UseAutoApi {
 export const useAutoApi = (): UseAutoApi => {
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [listAutos, setListAutos] = useState<AutosResponse[]>([]);
-    const urlApi = "http://192.168.137.42:3000/autos";
+    const urlApi = "http://192.168.232.42:3000/autos";
 
     const loadAutos = async () => {
         setIsLoading(true);
