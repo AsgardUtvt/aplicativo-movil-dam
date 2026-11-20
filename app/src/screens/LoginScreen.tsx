@@ -6,6 +6,7 @@ import { StackScreenProps } from '@react-navigation/stack';
 import { LoginParams } from '../navigator/LoginStackNavigator';
 import { useUserApi } from '../hooks/useUserApi';
 import { AuthContext } from '../context/AuthContext';
+import {getDeviceIPv4} from '../utils/singleton';
 
 interface Props extends StackScreenProps<LoginParams, 'LoginScreen'> {}
 
@@ -18,6 +19,7 @@ export const LoginScreen = ({ navigation }: Props) => {
     const handleLogin = async () => {
         if (!email.trim() || !password.trim()) {
             Alert.alert('Error', 'Por favor completa todos los campos');
+            console.log("Desde el login", getDeviceIPv4());
             return;
         }
 

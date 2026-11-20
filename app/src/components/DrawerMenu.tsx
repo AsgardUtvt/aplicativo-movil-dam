@@ -92,6 +92,17 @@ export const DrawerMenu = ({ navigation }: DrawerContentComponentProps) => {
             borderLeftColor="rose"
             action={() => navigation.navigate('DataResponseScreen')}
           />
+
+          <BtnMenu
+            text="Asistencias"
+            borderLeftColor="rose"
+            action={() => navigation.navigate('AsistenciasScreen')}
+          />
+          <BtnMenu
+            text="Ip"
+            borderLeftColor="rose"
+            action={() => navigation.navigate('IP')}
+          />
         </View>
       </View>
     </DrawerContentScrollView>

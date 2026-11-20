@@ -16,6 +16,7 @@ export class CreateAutoDto {
     modelo: string;
 
     @IsString()
+    @IsDateString()
     @IsOptional()
     ano: Date;
 

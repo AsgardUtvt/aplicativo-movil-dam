@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { pandoraApi } from "../api/pandoraApi";
+import {BaseUrl} from "../components/BaseUrl";
 
 export interface AutosResponse {
     id_propietario: number;
@@ -29,7 +30,7 @@ interface UseAutoApi {
 export const useAutoApi = (): UseAutoApi => {
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [listAutos, setListAutos] = useState<AutosResponse[]>([]);
-    const urlApi = "http://192.168.232.42:3000/autos";
+    const urlApi = `${BaseUrl}/autos`;
 
     const loadAutos = async () => {
         setIsLoading(true);

@@ -1,3 +1,4 @@
 import axios from "axios";
 
-export const tareaApi = axios.create();
+export const tareaApi = axios.create({
+});

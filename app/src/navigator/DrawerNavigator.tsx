@@ -13,7 +13,8 @@ import { LocationScreen } from "../screens/LocationScreen";
 import {useContext} from "react";
 import {AuthContext} from "../context/AuthContext";
 import { DataResponseScreen } from "../screens/DataResponseScreen";
-
+import { AsistenciasScreen } from "../screens/AsistenciasScreen";
+import { IpScreen } from "../screens/IpScreen";
 export type RootDrawerParams = {
     StackNavigator: undefined;
     PokemonNavigator: undefined;
@@ -23,6 +24,8 @@ export type RootDrawerParams = {
     ImagePickerScreen: undefined;
     LocationScreen: undefined;
     DataResponseScreen: undefined;
+    AsistenciasScreen: undefined;
+    IP: undefined;
 }
 
 const Drawer = createDrawerNavigator<RootDrawerParams>();
@@ -85,6 +88,16 @@ export const DrawerNavigator = () => {
                 name="DataResponseScreen"
                 options={{ title: "Estadisticas"}}
                 component={DataResponseScreen}
+            />
+            <Drawer.Screen
+                name="AsistenciasScreen"
+                options={{ title: "Asistencias"}}
+                component={AsistenciasScreen}
+            />
+            <Drawer.Screen
+                name="IP"
+                options={{ title: "IP"}}
+                component={IpScreen}
             />
         </Drawer.Navigator>
     );

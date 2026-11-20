@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { pandoraApi } from "../api/pandoraApi";
 import { UserRespose } from "../interfaces/pandoraApiRest";
 import { FormUserData } from "./useFormUser";
+import {BaseUrl} from "../components/BaseUrl";
 
 interface UseUserApi {
   isLoading: boolean;
@@ -16,7 +17,7 @@ interface UseUserApi {
 export const useUserApi = (): UseUserApi => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [listUser, setListUser] = useState<UserRespose[]>([]);
-  const urlApi = "http://192.168.232.42:3000/users";
+  const urlApi = `${BaseUrl}/users`;
 
   const loadUsers = async () => {
     setIsLoading(true);

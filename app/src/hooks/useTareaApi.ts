@@ -2,11 +2,12 @@ import { useEffect, useState } from 'react';
 import { Tarea } from '../interfaces/tareaResponse';
 import { ModalTareaData } from "./useTareaModal";
 import { tareaApi } from '../api/tareasApi';
+import {BaseUrl} from '../components/BaseUrl';
 
 export const useTareaApi = () => {
     const [isLoading, setLoading] = useState(false);
     const [listTareas, setListTareas] = useState<Tarea[]>([]);
-    const url = "http://192.168.232.42:3000/tareas";
+    const url = `${BaseUrl}/tareas`;
 
     const loadTarea = async () => {
         setLoading(true);

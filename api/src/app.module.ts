@@ -10,6 +10,7 @@ import { User } from './users/entities/user.entity.js';
 import { UsersModule } from './users/users.module.js';
 import {Auto} from './autos/entities/auto.entity.js';
 import {AutosModule} from './autos/autos.module.js';
+import { AsistenciasModule } from './asistencias/asistencias.module.js';
 
 @Module({
   imports: [
@@ -55,7 +56,8 @@ import {AutosModule} from './autos/autos.module.js';
     UsersModule,
     SensorsModule,
     TareasModule,
-    AutosModule
+    AutosModule,
+    AsistenciasModule
   ],
   controllers: [AppController],
   providers: [AppService],
